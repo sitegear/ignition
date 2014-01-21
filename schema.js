@@ -25,7 +25,7 @@
 						required: true,
 						validator: /^y(?:es)?|no?$/,
 						callback: function (answer) {
-							this.wrapper = (answer.match(/^y(?:es)?$/));
+							this.wrapper = /^y(?:es)?$/.test(answer);
 						}
 					},
 					invocationStyle: {
@@ -34,7 +34,7 @@
 						required: true,
 						validator: /^c(?:hained)?|d(?:iscrete)?$/,
 						callback: function (answer) {
-							this.chainedInvocation = answer.match(/^c(?:hained)?$/);
+							this.chainedInvocation = /^c(?:hained)?$/.test(answer);
 						}
 					},
 					comments: {
@@ -43,11 +43,11 @@
 						required: true,
 						validator: /^v(?:erbose)?|m(?:inimal)?|n(?:one)?$/,
 						callback: function (answer) {
-							if (answer.match(/^v(?:erbose)?$/)) {
+							if (/^v(?:erbose)?$/.test(answer)) {
 								this.comments = 'verbose';
-							} else if (answer.match(/^m(?:inimal)$/)) {
+							} else if (/^m(?:inimal)$/.test(answer)) {
 								this.comments = 'minimal';
-							} else if (answer.match(/^n(?:one)$/)) {
+							} else if (/^n(?:one)$/.test(answer)) {
 								this.comments = 'none';
 							}
 						}
@@ -90,7 +90,7 @@
 						default: "yes",
 						validator: /^y(?:es)?|no?$/,
 						callback: function (answer) {
-							if (answer.match(/^y(?:es)?$/)) {
+							if (/^y(?:es)?$/.test(answer)) {
 								this.middleware.push("sitegear3.logger()");
 							}
 						}
@@ -100,7 +100,7 @@
 						default: "yes",
 						validator: /^y(?:es)?|no?$/,
 						callback: function (answer) {
-							if (answer.match(/^y(?:es)?$/)) {
+							if (/^y(?:es)?$/.test(answer)) {
 								this.middleware.push("sitegear3.compress()");
 							}
 						}
@@ -110,7 +110,7 @@
 						default: "yes",
 						validator: /^y(?:es)?|no?$/,
 						callback: function (answer) {
-							if (answer.match(/^y(?:es)?$/)) {
+							if (/^y(?:es)?$/.test(answer)) {
 								this.middleware.push("sitegear3.cookieParser()");
 							}
 						}
@@ -120,7 +120,7 @@
 						default: "yes",
 						validator: /^y(?:es)?|no?$/,
 						callback: function (answer) {
-							if (answer.match(/^y(?:es)?$/)) {
+							if (/^y(?:es)?$/.test(answer)) {
 								this.middleware.push("sitegear3.cookieSession(app.settings.session)");
 							}
 						}
@@ -130,7 +130,7 @@
 						default: "yes",
 						validator: /^y(?:es)?|no?$/,
 						callback: function (answer) {
-							if (answer.match(/^y(?:es)?$/)) {
+							if (/^y(?:es)?$/.test(answer)) {
 								this.middleware.push("sitegear3.csrf()");
 							}
 						}
@@ -140,7 +140,7 @@
 						default: "yes",
 						validator: /^y(?:es)?|no?$/,
 						callback: function (answer) {
-							if (answer.match(/^y(?:es)?$/)) {
+							if (/^y(?:es)?$/.test(answer)) {
 								this.middleware.push("sitegear3.commonLocals(app)");
 							}
 						}
@@ -150,7 +150,7 @@
 						default: "yes",
 						validator: /^y(?:es)?|no?$/,
 						callback: function (answer) {
-							if (answer.match(/^y(?:es)?$/)) {
+							if (/^y(?:es)?$/.test(answer)) {
 								this.middleware.push("sitegear3.viewHelpers(app)");
 							}
 						}
@@ -165,10 +165,10 @@
 						validator: /^(?:(?:[a-zA-Z0-9\-_]+)(?:\/(?:[a-zA-Z0-9\-_]+))*|(?:\/(?:[a-zA-Z0-9\-_]+))*:(?:[a-zA-Z0-9\-_]+)(?:\/(?:[a-zA-Z0-9\-_]+))*)(?:\|(?:[a-zA-Z0-9\-_]+)(?:\/(?:[a-zA-Z0-9\-_]+))*|(?:\/(?:[a-zA-Z0-9\-_]+))*:(?:[a-zA-Z0-9\-_]+)(?:\/(?:[a-zA-Z0-9\-_]+))*)*$/,
 						callback: function (answer) {
 							if (answer) {
-								while (answer.match(/^(?:[a-zA-Z0-9\-_]+)(?:\/(?:[a-zA-Z0-9\-_]+))*|(?:\/(?:[a-zA-Z0-9\-_]+))*:(?:[a-zA-Z0-9\-_]+)(?:\/(?:[a-zA-Z0-9\-_]+))*[\|\b]/)) {
-									if (answer.match(/^(?:[a-zA-Z0-9\-_]+)(?:\/(?:[a-zA-Z0-9\-_]+))*/)) {
+								while (/^(?:[a-zA-Z0-9\-_]+)(?:\/(?:[a-zA-Z0-9\-_]+))*|(?:\/(?:[a-zA-Z0-9\-_]+))*:(?:[a-zA-Z0-9\-_]+)(?:\/(?:[a-zA-Z0-9\-_]+))*[\|\b]/.test(answer)) {
+									if (/^(?:[a-zA-Z0-9\-_]+)(?:\/(?:[a-zA-Z0-9\-_]+))*/.test(answer)) {
 										this.middleware.push("sitegear3.static(__dirname + '/" + answer.replace(/^((?:[a-zA-Z0-9\-_]+)(?:\/(?:[a-zA-Z0-9\-_]+))*)/, '$1') + "')");
-									} else if (answer.match(/(?:\/(?:[a-zA-Z0-9\-_]+))*:(?:[a-zA-Z0-9\-_]+)(?:\/(?:[a-zA-Z0-9\-_]+))*/)) {
+									} else if (/(?:\/(?:[a-zA-Z0-9\-_]+))*:(?:[a-zA-Z0-9\-_]+)(?:\/(?:[a-zA-Z0-9\-_]+))*/.test(answer)) {
 										this.middleware.push("sitegear3.static('" + answer.replace(/((?:\/(?:[a-zA-Z0-9\-_]+))*:(?:[a-zA-Z0-9\-_]+)(?:\/(?:[a-zA-Z0-9\-_]+))*)/, '$1') + "', __dirname + '/" + answer.replace(/((?:\/(?:[a-zA-Z0-9\-_]+))*:(?:[a-zA-Z0-9\-_]+)(?:\/(?:[a-zA-Z0-9\-_]+))*)/, '$2') + "')");
 									}
 									answer = answer.replace(/^(?:[a-zA-Z0-9\-_]+)(?:\/(?:[a-zA-Z0-9\-_]+))*|(?:\/(?:[a-zA-Z0-9\-_]+))*:(?:[a-zA-Z0-9\-_]+)(?:\/(?:[a-zA-Z0-9\-_]+))*[\|\b]/, '');
@@ -204,7 +204,7 @@
 						default: "yes",
 						validator: /^y(?:es)?|no?$/,
 						callback: function (answer) {
-							if (answer.match(/^y(?:es)?$/)) {
+							if (/^y(?:es)?$/.test(answer)) {
 								this.middleware.push("sitegear3.pageRouter(__dirname + '/" + this.templatesPath + "')");
 								this.middleware.push("sitegear3.notFound()");
 								this.middleware.push("sitegear3.internalServerError()");
