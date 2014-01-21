@@ -1,0 +1,47 @@
+{
+	"name": "sitegear3-ignition",
+	"version": "0.0.1",
+	"description": "Creates the necessary boilerplate for a Sitegear3 based website",
+	"keywords": [
+		"sitegear",
+		"sitegear3",
+		"ignition",
+		"sitegear ignition",
+		"startup",
+		"generate",
+		"boilerplate",
+		"scaffolding"
+	],
+	"homepage": "http://sitegear.org/",
+	"bugs": {
+		"url": "https://github.com/sitegear/ignition/issues"
+	},
+	"license": "MIT",
+	"author": {
+		"name": "Sitegear.org",
+		"email": "admin@sitegear.org",
+		"url": "http://sitegear.org/"
+	},
+	"contributors": [
+		{
+			"name": "Ben New",
+			"email": "ben@leftclick.com.au",
+			"url": "http://leftclick.com.au/"
+		}
+	],
+	"main": "index",
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/sitegear/ignition"
+	},
+	"scripts": {
+	},
+	"dependencies": {
+	},
+	"devDependencies": {
+	},
+	"engines": {
+		"node": ">=0.11.0"
+	},
+	"readmeFilename": "README.md"
+}
