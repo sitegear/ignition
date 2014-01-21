@@ -25,9 +25,7 @@
 						required: true,
 						validator: /^y(?:es)?|no?$/,
 						callback: function (answer) {
-							this.sitejs = (answer.match(/^y(?:es)?$/)) ?
-								'site.js/with-wrapper.js' :
-								'site.js/no-wrapper.js';
+							this.wrapper = (answer.match(/^y(?:es)?$/));
 						}
 					},
 					invocationStyle: {
@@ -36,11 +34,7 @@
 						required: true,
 						validator: /^c(?:hained)?|d(?:iscrete)?$/,
 						callback: function (answer) {
-							if (answer.match(/^c(?:hained)?$/)) {
-								this.invocationStyle = 'chained';
-							} else if (answer.match(/^d(?:iscrete)$/)) {
-								this.invocationStyle = 'discrete';
-							}
+							this.chainedInvocation = answer.match(/^c(?:hained)?$/);
 						}
 					},
 					comments: {
